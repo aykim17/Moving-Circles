@@ -18,7 +18,7 @@ public class ShapeDriver extends JPanel implements KeyListener, ActionListener {
         random = new Random();
         setSize(new Dimension(600, 600));
         setBackground(Color.DARK_GRAY);
-        shapeList = new ArrayList();
+        shapeList = new ArrayList<Circle>();
         timer = new Timer(1000/60, this);
         timer.start();
         
@@ -43,11 +43,11 @@ public class ShapeDriver extends JPanel implements KeyListener, ActionListener {
     public void actionPerformed(ActionEvent e) {
         for (Circle circle : shapeList) {
             circle.move();
-            if (circle.getX() + circle.getRadius()*2 >= 600) {
+            if (circle.getX() + circle.getRadius()*2 >= getSize().getWidth()) {
                 circle.changeDx();
             } else if (circle.getX() <= 0) {
                 circle.changeDx();
-            } else if (circle.getY() + circle.getRadius()*2 >= 580) {
+            } else if (circle.getY() + circle.getRadius()*2 >= getSize().getHeight()) {
                 circle.changeDy();
             } else if (circle.getY() <= 0) {
                 circle.changeDy();
