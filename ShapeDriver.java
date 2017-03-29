@@ -1,5 +1,6 @@
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.JColorChooser;
 import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -82,6 +83,9 @@ public class ShapeDriver extends JPanel implements KeyListener, ActionListener {
 
         if (e.getKeyCode() == KeyEvent.VK_C) {
             shapeList.add(new Circle(fillColor, borderColor, randX, randY, random.nextInt(25)));
+        } else if (e.getKeyCode() == KeyEvent.VK_B) {
+        	Color color = JColorChooser.showDialog(this, "Background Color", getBackground());
+        	setBackground(color);
         }
 
         repaint();
