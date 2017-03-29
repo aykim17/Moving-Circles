@@ -7,3 +7,5 @@ Simply press 'c' to add a moving circle to the frame.
 - ~Allow user to change frame size, and have circles adjust~
 - ~Allow user to change background color~
 - Allow user to change ball speed
+- Allow user to pause
+- Allow user to clear the screen
