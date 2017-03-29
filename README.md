@@ -5,4 +5,5 @@ Simply press 'c' to add a moving circle to the frame.
 
 ## ToDo
 - ~Allow user to change frame size, and have circles adjust~
-- Allow user to change background color
+- ~Allow user to change background color~
+- Allow user to change ball speed
