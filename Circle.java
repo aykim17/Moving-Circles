@@ -17,18 +17,6 @@ public class Circle extends Shape {
         center = new Point(x + radius, y + radius);
     }
 
-    public Circle(Color newFillColor, int x, int y, int newRadius) {
-        super(newFillColor, x, y);
-        radius = newRadius;
-        center = new Point(x + radius, y + radius);
-    }
-
-    public Circle(int x, int y, int newRadius) {
-        super(x, y);
-        radius = newRadius;
-        center = new Point(x + radius, y + radius);
-    }
-
     // Moves circle and adjusts the circle's center location
     @Override
     public void move() {

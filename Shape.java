@@ -83,6 +83,11 @@ public abstract class Shape {
     public int getDy() {
         return dy;
     }
+
+    public void setSpeed(int n) {  // Change the speed of the shape
+        dx = n;
+        dy = n;
+    }
     
     // Changes the x direction
     public void changeDx() {
