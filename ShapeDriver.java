@@ -14,6 +14,7 @@ public class ShapeDriver extends JPanel implements KeyListener, ActionListener {
     private Random random;
     private ArrayList<Circle> shapeList;
     private Timer timer;
+    private boolean paused;
     private int speed;
 
     public ShapeDriver() {
@@ -23,7 +24,8 @@ public class ShapeDriver extends JPanel implements KeyListener, ActionListener {
         setBackground(Color.DARK_GRAY);
         shapeList = new ArrayList<Circle>();
         speed = 1;
-        timer = new Timer(1000/60, this);
+        paused = false;
+        timer = new Timer(1000/70, this);
         timer.start();
         setFocusable(true);
         addKeyListener(this);
@@ -86,12 +88,12 @@ public class ShapeDriver extends JPanel implements KeyListener, ActionListener {
         	Circle circ = new Circle(fillColor, borderColor, randX, randY, random.nextInt(20) + 10);
         	circ.setSpeed(speed);
             shapeList.add(circ);
-        } else if (e.getKeyCode() == KeyEvent.VK_B) {
+        } else if (e.getKeyCode() == KeyEvent.VK_B) {  // Change background color
         	Color color = JColorChooser.showDialog(this, "Background Color", getBackground());
         	if (!color.equals(getBackground())) {
         		setBackground(color);
         	}
-        } else if (e.getKeyCode() == KeyEvent.VK_S) {
+        } else if (e.getKeyCode() == KeyEvent.VK_S) {  // Change speed of circles
         	int newSpeed = Integer.parseInt(JOptionPane.showInputDialog(this, 
         		"Enter the speed", "Speed", JOptionPane.QUESTION_MESSAGE));	
         	
@@ -105,6 +107,13 @@ public class ShapeDriver extends JPanel implements KeyListener, ActionListener {
         			JOptionPane.ERROR_MESSAGE);
         	}
 
+        } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {  // Start and stop timer
+        	if (!paused && !shapeList.isEmpty()) {
+        		timer.stop();
+        		paused = true;
+        	} else {
+        		timer.start();
+        	}
         }
 
         repaint();
