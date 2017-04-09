@@ -114,6 +114,8 @@ public class ShapeDriver extends JPanel implements KeyListener, ActionListener {
         	} else {
         		timer.start();
         	}
+        } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+        	shapeList.clear();
         }
 
         repaint();
