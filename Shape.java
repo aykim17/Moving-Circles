@@ -9,22 +9,10 @@ public abstract class Shape {
     private Point location;
     private int dx = 1, dy = 1;
     
-    // Different constructors depending on parameters passed
+    // Shape constructor
     public Shape(Color newFillColor, Color newBorderColor, int x, int y) {
         fillColor = newFillColor;
         borderColor = newBorderColor;
-        location = new Point(x, y);
-    }
-
-    public Shape(Color newFillColor, int x, int y) {
-        fillColor = newFillColor;
-        borderColor = Color.BLACK;
-        location = new Point(x, y);
-    }
-    
-    public Shape(int x, int y) {
-        fillColor = Color.WHITE;
-        borderColor = Color.BLACK;
         location = new Point(x, y);
     }
     
@@ -36,26 +24,6 @@ public abstract class Shape {
     // Changes the fill color
     public void setFillColor(Color newFillColor) {
         fillColor = newFillColor;
-    }
-    
-    // Returns the current border color
-    public Color getBorderColor() {
-        return borderColor;
-    }
-    
-    // Changes the border color
-    public void setBorderColor(Color newBorderColor) {
-        borderColor = newBorderColor;
-    }
-    
-    // Returns false if fill color is not default white
-    public boolean isFilled() {
-        return fillColor.equals(Color.WHITE);
-    }
-    
-    // Returns the location of the shape
-    public Point getLocation() {
-        return location;
     }
     
     // Changes the location by dx and dy
@@ -100,7 +68,6 @@ public abstract class Shape {
     }
     
     // Abstract methods to be implemented in subclasses
-    abstract double getArea();
-    abstract double getPerimeter();
+    abstract Rectangle getRectangle();
     abstract void draw(Graphics g);
 }

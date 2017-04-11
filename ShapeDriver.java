@@ -59,7 +59,7 @@ public class ShapeDriver extends JPanel implements KeyListener, ActionListener {
             }
             
             for (Circle circle2 : shapeList) {
-                if (intersecting(circle, circle2)) {
+                if (circle.getRectangle().intersects(circle2.getRectangle())) {
                     circle.changeDx();  
                     circle.changeDy();
                     circle2.changeDx();
@@ -131,14 +131,5 @@ public class ShapeDriver extends JPanel implements KeyListener, ActionListener {
     // but must have since this class implements KeyListiner 
     @Override
     public void keyTyped(KeyEvent e) {
-    }
-    
-    // Returns distance between two points
-    private boolean intersecting(Circle c1, Circle c2) {
-        double xDifference = c2.getX() - c1.getX();
-        double yDifference = c2.getY() - c1.getY();
-        double radii = c1.getRadius() + c2.getRadius();
-
-        return xDifference*xDifference + yDifference*yDifference < radii*radii;
     }
 }

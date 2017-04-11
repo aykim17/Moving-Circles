@@ -25,6 +25,11 @@ public class Circle extends Shape {
         center.y += getDy();
     }
 
+    @Override
+    public Rectangle getRectangle() {
+        return new Rectangle(getX(), getY(), radius * 2, radius * 2);
+    }
+
     // Returns the center point of the circle
     public Point getCenter() {
         return center;
@@ -35,18 +40,6 @@ public class Circle extends Shape {
         return radius;
     }
 
-    // Returns the area of the circle
-    @Override
-    public double getArea() {
-        return Math.PI * radius * radius;
-    }
-
-    // Returns the circumference of the circle
-    @Override
-    public double getPerimeter() {
-        return Math.PI * 2 * radius;
-    }
-
     // Draws a circle
     @Override
     public void draw(Graphics g) {
@@ -55,11 +48,5 @@ public class Circle extends Shape {
         g2.setPaint(getFillColor());
         g2.fill(ellipse);
         g2.draw(ellipse);
-    }
-
-    // Returns the circle area and circumference
-    @Override
-    public String toString() {
-        return "CIRCLE: " + "\nArea: " + getArea() + "\nCircumference: " + getPerimeter();
     }
 }
