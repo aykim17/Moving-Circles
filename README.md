@@ -2,7 +2,7 @@
 Create a moving circles screensaver.  Originally started as Lab for C212.
 
 Simply press 'c' to add a moving circle to the frame.
-Press 's' to change the speed.
+Press 's' to change the speed (NOTE: max speed is 5).
 Press the spacebar to pause/start the circle movement.
 Press ESC to clear the screen and reset the shape speed
 
@@ -13,4 +13,4 @@ Press ESC to clear the screen and reset the shape speed
 - ~Allow user to pause~
 - ~Allow user to clear the screen~
 - Add in new shapes
-- Fix intersection bug
+- ~Fix intersection bug~ Not perfect, but much improved.  
