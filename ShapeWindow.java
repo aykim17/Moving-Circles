@@ -22,7 +22,6 @@ public class ShapeWindow extends JFrame {
         add(shapeDriver);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(600, 600);
-        setResizable(true);
         setVisible(true);
     }
 

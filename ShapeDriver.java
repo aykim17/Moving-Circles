@@ -1,7 +1,7 @@
+
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.JColorChooser;
-import javax.swing.JOptionPane;
 import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -12,20 +12,18 @@ import java.awt.event.*;
 public class ShapeDriver extends JPanel implements KeyListener, ActionListener {
 
     private Random random;
-    private ArrayList<Circle> shapeList;
+    private ArrayList<Shape> shapeList;
     private Timer timer;
     private boolean paused;
-    private int speed;
 
     public ShapeDriver() {
         super();
         random = new Random();
         setSize(new Dimension(600, 600));
         setBackground(Color.DARK_GRAY);
-        shapeList = new ArrayList<Circle>();
-        speed = 1;
+        shapeList = new ArrayList<>();
         paused = false;
-        timer = new Timer(1000/70, this);
+        timer = new Timer(1000 / 60, this);
         timer.start();
         setFocusable(true);
         addKeyListener(this);
@@ -38,45 +36,36 @@ public class ShapeDriver extends JPanel implements KeyListener, ActionListener {
         super.paintComponent(g);
 
         // Draws all the shapes in the list so far
-        for (Circle circle: shapeList) {
-            circle.draw(g);
+        for (Shape shape : shapeList) {
+            shape.draw(g);
         }
     }
-    
-    // Moves circles according to rules
+
+    // Moves Shapes according to rules
     @Override
     public void actionPerformed(ActionEvent e) {
-        for (Circle circle : shapeList) {
-            circle.move();
-            if (circle.getX() + circle.getRadius()*2 >= getSize().getWidth()) {
-                circle.changeDx();
-            } else if (circle.getX() <= 0) {
-                circle.changeDx();
-            } else if (circle.getY() + circle.getRadius()*2 >= getSize().getHeight()) {
-                circle.changeDy();
-            } else if (circle.getY() <= 0) {
-                circle.changeDy();
-            }
-            
-            for (Circle circle2 : shapeList) {
-                if (circle.getRectangle().intersects(circle2.getRectangle())) {
-                    circle.changeDx();  
-                    circle.changeDy();
-                    circle2.changeDx();
-                    circle2.changeDy();
+        for (Shape shape : shapeList) {
+            shape.move(getSize().getWidth(), getSize().getHeight());
+
+            for (Shape shape2 : shapeList) {
+                if (shape.getRectangle().intersects(shape2.getRectangle())) {
+                    shape.changeDx();
+                    shape.changeDy();
+                    shape2.changeDx();
+                    shape2.changeDy();
                     
                     // The circles should swap colors
-                    Color tempColor = circle2.getFillColor();
-                    circle2.setFillColor(circle.getFillColor());
-                    circle.setFillColor(tempColor);
+                    Color tempColor = shape2.getFillColor();
+                    shape2.setFillColor(shape.getFillColor());
+                    shape.setFillColor(tempColor);
                 }
             }
         }
-        
+
         repaint();
     }
 
-    // Adds Circle to list to be drawn
+    // Adds Shape to list to be drawn
     @Override
     public void keyPressed(KeyEvent e) {
         Color fillColor = new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256));
@@ -84,43 +73,43 @@ public class ShapeDriver extends JPanel implements KeyListener, ActionListener {
         int randX = random.nextInt(500);
         int randY = random.nextInt(500);
 
-        if (e.getKeyCode() == KeyEvent.VK_C) {
-        	Circle circ = new Circle(fillColor, borderColor, randX, randY, random.nextInt(20) + 10);
-        	circ.setSpeed(speed);
-            shapeList.add(circ);
-        } else if (e.getKeyCode() == KeyEvent.VK_B) {  // Change background color
-        	Color color = JColorChooser.showDialog(this, "Background Color", getBackground());
-        	if (!color.equals(getBackground())) {
-        		setBackground(color);
-        	}
-        } else if (e.getKeyCode() == KeyEvent.VK_S) {  // Change speed of circles
-        	int newSpeed = Integer.parseInt(JOptionPane.showInputDialog(this, 
-        		"Enter the speed", "Speed", JOptionPane.QUESTION_MESSAGE));	
-        	
-        	if (newSpeed > 0 && newSpeed <= 5) {
-        		for (Circle c : shapeList) {
-        			speed = newSpeed;
-        			c.setSpeed(newSpeed);
-        		}
-        	} else {
-        		JOptionPane.showMessageDialog(this, "Number must be > 0 and <= 5.", "ERROR",
-        			JOptionPane.ERROR_MESSAGE);
-        	}
-
-        } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {  // Start and stop timer
-        	if (!paused && !shapeList.isEmpty()) {
-        		timer.stop();
-        		paused = true;
-        	} else {
-        		timer.start();
-        	}
-        } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-        	shapeList.clear();
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_C:
+                Circle circ = new Circle(fillColor, borderColor, randX, randY, random.nextInt(20) + 10);
+                shapeList.add(circ);
+                break;
+            case KeyEvent.VK_R:
+                Box box = new Box(fillColor, borderColor, randX, randY, random.nextInt(20) + 20, random.nextInt(20) + 20);
+                shapeList.add(box);
+                break;
+            case KeyEvent.VK_S:
+                Square square = new Square(fillColor, borderColor, randX, randY, random.nextInt(20) + 20);
+                shapeList.add(square);
+                break;
+            case KeyEvent.VK_B:  // Change background color
+                Color color = JColorChooser.showDialog(this, "Background Color", getBackground());
+                if (!color.equals(getBackground())) {
+                    setBackground(color);
+                }
+                break;
+            case KeyEvent.VK_SPACE:  // Start and stop timer
+                if (!paused && !shapeList.isEmpty()) {
+                    timer.stop();
+                    paused = true;
+                } else {
+                    timer.start();
+                }
+                break;
+            case KeyEvent.VK_ESCAPE:  // Clears panel
+                shapeList.clear();
+                break;
+            default:
+                break;
         }
 
         repaint();
     }
-    
+
     // Do not neet to do anything with this method from KeyListener
     // but must have since this class implements KeyListiner 
     @Override

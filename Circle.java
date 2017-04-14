@@ -8,31 +8,27 @@ import java.awt.geom.Ellipse2D;
 public class Circle extends Shape {
 
     private int radius;
-    private Point center;
 
     // Constructors include new parameter for circle radius
     public Circle(Color newFillColor, Color newBorderColor, int x, int y, int newRadius) {
         super(newFillColor, newBorderColor, x, y);
         radius = newRadius;
-        center = new Point(x + radius, y + radius);
     }
-
-    // Moves circle and adjusts the circle's center location
+    
     @Override
-    public void move() {
-        super.move();
-        center.x += getDx();
-        center.y += getDy();
+    public void move(double width, double height) {
+        if (getX() + 2 * radius >= width) {
+            changeDx();
+        } else if (getY() + 2 * radius >= height) {
+            changeDy();
+        }
+        
+        super.move(width, height);
     }
 
     @Override
     public Rectangle getRectangle() {
         return new Rectangle(getX(), getY(), radius * 2, radius * 2);
-    }
-
-    // Returns the center point of the circle
-    public Point getCenter() {
-        return center;
     }
 
     // Returns circle's radius

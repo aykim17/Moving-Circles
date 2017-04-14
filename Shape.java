@@ -27,7 +27,13 @@ public abstract class Shape {
     }
     
     // Changes the location by dx and dy
-    public void move() {
+    // Takes in width and height of JPanel
+    public void move(double width, double height) {
+        if (getX() <= 1) {
+            changeDx();
+        } else if (getY() <= 1) {
+            changeDy();
+        }
         location.x += dx;
         location.y += dy;
     }
@@ -40,21 +46,6 @@ public abstract class Shape {
     // Returns the y-coordinate
     public int getY() {
         return location.y;
-    }
-    
-    // Returns the x direction
-    public int getDx() {
-        return dx;
-    }
-    
-    // Returns the y direction
-    public int getDy() {
-        return dy;
-    }
-
-    public void setSpeed(int n) {  // Change the speed of the shape
-        dx = n;
-        dy = n;
     }
     
     // Changes the x direction
