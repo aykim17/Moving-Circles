@@ -109,15 +109,11 @@ public class ShapeDriver extends JPanel implements KeyListener, ActionListener {
 
         repaint();
     }
-
-    // Do not neet to do anything with this method from KeyListener
-    // but must have since this class implements KeyListiner 
+    
     @Override
     public void keyReleased(KeyEvent e) {
     }
-
-    // Do not need to do anything with this method from KeyListener
-    // but must have since this class implements KeyListiner 
+    
     @Override
     public void keyTyped(KeyEvent e) {
     }
