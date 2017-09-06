@@ -1,4 +1,3 @@
-
 import java.awt.*;
 
 public class Box extends Shape {
@@ -23,8 +22,7 @@ public class Box extends Shape {
         
         super.move(width, height);
     }
-    
-    // Draws the rectangle
+
     @Override
     public void draw(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;

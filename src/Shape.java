@@ -8,8 +8,7 @@ public abstract class Shape {
     private Color fillColor, borderColor;
     private Point location;
     private int dx = 1, dy = 1;
-    
-    // Shape constructor
+
     public Shape(Color newFillColor, Color newBorderColor, int x, int y) {
         fillColor = newFillColor;
         borderColor = newBorderColor;
@@ -25,7 +24,7 @@ public abstract class Shape {
     public void setFillColor(Color newFillColor) {
         fillColor = newFillColor;
     }
-    
+
     // Changes the location by dx and dy
     // Takes in width and height of JPanel
     public void move(double width, double height) {

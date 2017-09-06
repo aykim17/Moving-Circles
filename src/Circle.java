@@ -1,10 +1,10 @@
-
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
 /**
  * Implementation of Circle class
  */
+
 public class Circle extends Shape {
 
     private int radius;
@@ -31,12 +31,6 @@ public class Circle extends Shape {
         return new Rectangle(getX(), getY(), radius * 2, radius * 2);
     }
 
-    // Returns circle's radius
-    public int getRadius() {
-        return radius;
-    }
-
-    // Draws a circle
     @Override
     public void draw(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
